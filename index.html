@@ -1,0 +1,2200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Wolf & Company — Fractional COO Services</title>
+<meta name="description" content="Fractional COO services for founders who want to scale without burning out. Executive operational leadership at a fraction of the cost.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   DESIGN TOKENS
+   ═══════════════════════════════════════ */
+:root {
+  --black: #080808;
+  --charcoal: #111111;
+  --surface: #161616;
+  --surface-2: #1c1c1c;
+  --border: rgba(255,255,255,0.06);
+  --border-gold: rgba(201,168,76,0.15);
+  --gold: #c9a84c;
+  --gold-light: #e2c56f;
+  --gold-dim: rgba(201,168,76,0.5);
+  --gold-glow: rgba(201,168,76,0.08);
+  --red: #be3f39;
+  --white: #f0ede5;
+  --white-dim: #c8c4bb;
+  --gray: #7a7870;
+  --gray-light: #b0aca3;
+  --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --radius: 6px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+  --shadow-md: 0 8px 32px rgba(0,0,0,0.4);
+  --shadow-lg: 0 16px 64px rgba(0,0,0,0.5);
+  --shadow-gold: 0 4px 24px rgba(201,168,76,0.15);
+  --container: 1360px;
+}
+
+/* ═══════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+ul, ol { list-style: none; }
+::selection { background: var(--gold); color: var(--black); }
+
+/* Subtle noise texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.5;
+}
+
+/* ═══════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════ */
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.eyebrow::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+}
+.headline {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  font-weight: 300;
+  line-height: 1.12;
+  color: var(--white);
+  letter-spacing: -0.01em;
+}
+.headline em { font-style: italic; color: var(--gold); }
+.sub-text {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--gray-light);
+  line-height: 1.8;
+  max-width: 540px;
+}
+
+/* ═══════════════════════════════════════
+   BUTTONS
+   ═══════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 16px 32px;
+  border-radius: var(--radius);
+  transition: all 0.35s var(--ease);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+  color: var(--black);
+  box-shadow: var(--shadow-gold);
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(201,168,76,0.3);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.btn-ghost:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(201,168,76,0.1);
+}
+
+/* ═══════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 20px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.4s var(--ease);
+}
+.nav.scrolled {
+  padding: 12px 48px;
+  background: rgba(8,8,8,0.92);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.nav-logo svg { height: 28px; width: auto; transition: transform 0.3s var(--ease); }
+.nav-logo:hover svg { transform: scale(1.03); }
+.nav-links { display: flex; align-items: center; gap: 36px; }
+.nav-links a {
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-light);
+  transition: color 0.25s;
+  cursor: pointer;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0; right: 0;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.3s var(--ease);
+}
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-cta-link {
+  font-size: 0.72rem !important;
+  letter-spacing: 0.14em !important;
+  color: var(--black) !important;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+  padding: 10px 22px;
+  border-radius: var(--radius);
+  transition: all 0.3s var(--ease) !important;
+  box-shadow: var(--shadow-gold);
+}
+.nav-cta-link::after { display: none !important; }
+.nav-cta-link:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 24px rgba(201,168,76,0.35) !important;
+  color: var(--black) !important;
+}
+.hamburger {
+  display: none;
+  cursor: pointer;
+  width: 32px;
+  height: 24px;
+  position: relative;
+  z-index: 1001;
+}
+.hamburger span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: var(--white);
+  transition: all 0.35s var(--ease);
+  border-radius: 2px;
+}
+.hamburger span:nth-child(1) { top: 4px; }
+.hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+.hamburger span:nth-child(3) { bottom: 4px; }
+.hamburger.active span:nth-child(1) { top: 50%; transform: translateY(-50%) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { bottom: auto; top: 50%; transform: translateY(-50%) rotate(-45deg); }
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: rgba(8,8,8,0.97);
+  backdrop-filter: blur(24px);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease);
+}
+.mobile-menu.open { opacity: 1; pointer-events: all; }
+.mobile-menu a {
+  font-family: var(--serif);
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: var(--white);
+  cursor: pointer;
+  transition: color 0.2s, transform 0.3s var(--ease);
+  opacity: 0;
+  transform: translateY(20px);
+}
+.mobile-menu.open a {
+  opacity: 1;
+  transform: translateY(0);
+}
+.mobile-menu a:nth-child(1) { transition-delay: 0.1s; }
+.mobile-menu a:nth-child(2) { transition-delay: 0.15s; }
+.mobile-menu a:nth-child(3) { transition-delay: 0.2s; }
+.mobile-menu a:nth-child(4) { transition-delay: 0.25s; }
+.mobile-menu a:nth-child(5) { transition-delay: 0.3s; }
+.mobile-menu a:nth-child(6) { transition-delay: 0.35s; }
+.mobile-menu a:hover { color: var(--gold); }
+
+/* ═══════════════════════════════════════
+   SECTIONS & PAGES
+   ═══════════════════════════════════════ */
+section { display: none; opacity: 0; transform: translateY(12px); transition: opacity 0.35s var(--ease), transform 0.35s var(--ease); }
+section.active { display: block; }
+section.visible { opacity: 1; transform: translateY(0); }
+section.fade-out { opacity: 0; transform: translateY(-8px); }
+/* Nav link click feedback */
+.nav-links a:active, .mobile-menu a:active { transform: scale(0.95); }
+/* Smooth cursor for clickable elements */
+[onclick] { cursor: pointer; }
+.container { max-width: var(--container); margin: 0 auto; padding: 0 48px; }
+
+/* ═══════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 160px 48px 120px 48px;
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+}
+.hero-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: heroFadeUp 0.8s 0.2s var(--ease) forwards;
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 5.2vw, 5.2rem);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: heroFadeUp 0.8s 0.4s var(--ease) forwards;
+}
+.hero-title em { font-style: italic; color: var(--gold); }
+.hero-desc {
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--gray-light);
+  max-width: 460px;
+  line-height: 1.8;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: heroFadeUp 0.8s 0.6s var(--ease) forwards;
+}
+.hero-btns {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: heroFadeUp 0.8s 0.8s var(--ease) forwards;
+}
+.hero-visual {
+  position: relative;
+  overflow: hidden;
+}
+.hero-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--black) 0%, transparent 50%);
+  z-index: 1;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 70% at 60% 45%, rgba(201,168,76,0.07) 0%, transparent 70%),
+              linear-gradient(160deg, var(--surface) 0%, var(--black) 100%);
+}
+/* Animated geometric */
+.hero-geo {
+  position: absolute;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 540px;
+  height: 540px;
+  opacity: 0;
+  animation: geoIn 1.5s 0.5s var(--ease) forwards;
+}
+.hero-geo circle, .hero-geo line, .hero-geo polygon {
+  animation: geoSpin 60s linear infinite;
+  transform-origin: 50% 50%;
+}
+@keyframes geoSpin { to { transform: rotate(360deg); } }
+
+/* Stat bar */
+.hero-stats {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  z-index: 3;
+  display: flex;
+  border-top: 1px solid var(--border-gold);
+  background: rgba(8,8,8,0.7);
+  backdrop-filter: blur(16px);
+  opacity: 0;
+  animation: heroFadeUp 0.8s 1s var(--ease) forwards;
+}
+.hero-stat {
+  flex: 1;
+  padding: 28px 48px;
+  border-right: 1px solid var(--border);
+}
+.hero-stat:last-child { border-right: none; }
+.hero-stat-num {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.hero-stat-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes geoIn {
+  from { opacity: 0; transform: translateY(-50%) scale(0.9); }
+  to { opacity: 1; transform: translateY(-50%) scale(1); }
+}
+
+/* ═══════════════════════════════════════
+   PROBLEM SECTION
+   ═══════════════════════════════════════ */
+.sec-problem { padding: 120px 0; }
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  margin-top: 72px;
+  align-items: start;
+}
+.problem-text p {
+  font-size: 1.1rem;
+  color: var(--gray-light);
+  max-width: 520px;
+  line-height: 1.85;
+  margin-bottom: 20px;
+}
+.problem-list { display: flex; flex-direction: column; gap: 0; }
+.problem-item {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  transition: all 0.3s var(--ease);
+}
+.problem-item:first-child { border-top: 1px solid var(--border); }
+.problem-item:hover { padding-left: 12px; }
+.p-num {
+  font-family: var(--serif);
+  font-size: 0.85rem;
+  color: var(--gold-dim);
+  min-width: 28px;
+  padding-top: 3px;
+}
+.p-title {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.p-desc {
+  font-size: 0.88rem;
+  color: var(--gray);
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════
+   SOLUTION SECTION
+   ═══════════════════════════════════════ */
+.sec-solution {
+  background: var(--charcoal);
+  padding: 120px 0;
+  position: relative;
+  overflow: hidden;
+}
+.sec-solution::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+.solution-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.sol-card {
+  background: var(--surface);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  padding: 44px;
+  position: relative;
+  overflow: hidden;
+}
+.sol-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--gold), transparent 80%);
+}
+.sol-card-eyebrow {
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.sol-card-title {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+.sol-card p {
+  color: var(--gray);
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+.pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 28px;
+}
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.88rem;
+  color: var(--gray-light);
+}
+.pill-dot {
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.solution-text .headline { max-width: 100%; margin-bottom: 20px; }
+.solution-text p {
+  font-size: 1rem;
+  color: var(--gray-light);
+  line-height: 1.85;
+  margin-bottom: 16px;
+}
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 32px;
+}
+.compare-box {
+  padding: 24px;
+  border-radius: var(--radius);
+}
+.compare-box.bad {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+}
+.compare-box.good {
+  background: rgba(201,168,76,0.05);
+  border: 1px solid var(--border-gold);
+}
+.compare-label {
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.compare-box.bad .compare-label { color: var(--gray); }
+.compare-box.good .compare-label { color: var(--gold); }
+.compare-list { display: flex; flex-direction: column; gap: 10px; }
+.compare-list li {
+  font-size: 0.82rem;
+  color: var(--gray-light);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  line-height: 1.5;
+}
+.compare-box.bad li::before { content: '✕'; color: #774444; font-size: 0.75rem; }
+.compare-box.good li::before { content: '✓'; color: var(--gold); font-size: 0.75rem; }
+
+/* ═══════════════════════════════════════
+   SERVICES GRID
+   ═══════════════════════════════════════ */
+.sec-services { padding: 120px 0; }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin-top: 64px;
+  background: var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.svc-tile {
+  background: var(--black);
+  padding: 40px 32px;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s var(--ease);
+}
+.svc-tile::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(to right, var(--gold), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease);
+}
+.svc-tile:hover { background: var(--surface); }
+.svc-tile:hover::after { transform: scaleX(1); }
+.svc-icon {
+  width: 44px; height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(201,168,76,0.08);
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  transition: background 0.3s;
+}
+.svc-tile:hover .svc-icon { background: rgba(201,168,76,0.15); }
+.svc-name {
+  font-family: var(--serif);
+  font-size: 1.12rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.svc-desc {
+  font-size: 0.82rem;
+  color: var(--gray);
+  line-height: 1.65;
+}
+
+/* ═══════════════════════════════════════
+   RESULTS / METRICS
+   ═══════════════════════════════════════ */
+.sec-results {
+  background: var(--charcoal);
+  padding: 120px 0;
+  position: relative;
+  overflow: hidden;
+}
+.results-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 72px;
+  align-items: end;
+}
+.results-header p {
+  font-size: 1rem;
+  color: var(--gray-light);
+  line-height: 1.8;
+}
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border-gold);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.metric {
+  background: var(--charcoal);
+  padding: 48px 40px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.35s var(--ease);
+}
+.metric:hover { background: var(--surface-2); }
+.metric::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, var(--gold), transparent);
+}
+.metric-num {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 3.5vw, 3.6rem);
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.metric-title {
+  font-size: 0.92rem;
+  color: var(--white);
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.metric-desc {
+  font-size: 0.78rem;
+  color: var(--gray);
+  line-height: 1.6;
+}
+.metric-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(201,168,76,0.04);
+  text-align: center;
+}
+.metric-cta-inner .headline {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+
+/* ═══════════════════════════════════════
+   CTA BANNER
+   ═══════════════════════════════════════ */
+.cta-banner {
+  background: linear-gradient(135deg, rgba(201,168,76,0.12) 0%, rgba(201,168,76,0.03) 50%, transparent 100%);
+  border-top: 1px solid var(--border-gold);
+  border-bottom: 1px solid var(--border-gold);
+  padding: 100px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-inner { max-width: 700px; margin: 0 auto; }
+.cta-inner .headline { margin-bottom: 20px; }
+.cta-inner p {
+  font-size: 1rem;
+  color: var(--gray-light);
+  line-height: 1.75;
+  margin-bottom: 36px;
+}
+.cta-btns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ═══════════════════════════════════════
+   ABOUT PAGE
+   ═══════════════════════════════════════ */
+.about-hero { padding: 180px 0 100px; }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.about-grid h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 4.5vw, 4.8rem);
+  font-weight: 300;
+  line-height: 1.08;
+  margin-bottom: 24px;
+}
+.about-grid h1 em { font-style: italic; color: var(--gold); }
+.about-grid p {
+  font-size: 1.05rem;
+  color: var(--gray-light);
+  line-height: 1.85;
+  margin-bottom: 16px;
+}
+.portrait-frame {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: var(--surface);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.portrait-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 60%);
+}
+.portrait-initials {
+  font-family: var(--serif);
+  font-size: 5.5rem;
+  font-weight: 300;
+  color: rgba(201,168,76,0.25);
+}
+.portrait-caption {
+  position: absolute;
+  bottom: 24px; left: 24px; right: 24px;
+  background: rgba(8,8,8,0.85);
+  backdrop-filter: blur(12px);
+  padding: 18px 22px;
+  border-left: 2px solid var(--gold);
+  border-radius: var(--radius);
+}
+.portrait-caption strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.portrait-caption span {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.about-values {
+  background: var(--charcoal);
+  padding: 100px 0;
+}
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  margin-top: 56px;
+}
+.val-item {
+  padding-top: 28px;
+  border-top: 1px solid var(--border-gold);
+  transition: transform 0.3s var(--ease);
+}
+.val-item:hover { transform: translateY(-4px); }
+.val-num {
+  font-family: var(--serif);
+  font-size: 0.88rem;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.val-title {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.val-body {
+  font-size: 0.88rem;
+  color: var(--gray);
+  line-height: 1.75;
+}
+
+/* ═══════════════════════════════════════
+   SERVICES PAGE
+   ═══════════════════════════════════════ */
+.page-header { padding: 180px 0 80px; }
+.page-header h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-weight: 300;
+  line-height: 1.08;
+  max-width: 800px;
+}
+.page-header h1 em { font-style: italic; color: var(--gold); }
+.page-header p {
+  font-size: 1.05rem;
+  color: var(--gray-light);
+  max-width: 560px;
+  line-height: 1.8;
+  margin-top: 24px;
+}
+.svc-full { padding: 40px 0 120px; }
+.svc-full-item {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 60px;
+  padding: 56px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.svc-full-item:first-child { border-top: 1px solid var(--border); }
+.svc-full-left { position: sticky; top: 100px; }
+.svc-full-num {
+  font-family: var(--serif);
+  font-size: 0.82rem;
+  color: var(--gold-dim);
+  margin-bottom: 10px;
+}
+.svc-full-name {
+  font-family: var(--serif);
+  font-size: 1.7rem;
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.2;
+}
+.svc-full-body p {
+  font-size: 1rem;
+  color: var(--gray-light);
+  line-height: 1.85;
+  margin-bottom: 16px;
+  max-width: 620px;
+}
+.deliverables {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+.del {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  font-size: 0.88rem;
+  color: var(--gray-light);
+}
+.del::before {
+  content: '→';
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════
+   RESULTS PAGE
+   ═══════════════════════════════════════ */
+.big-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  background: var(--border-gold);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 80px;
+}
+.big-metric {
+  background: var(--black);
+  padding: 56px 48px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.35s var(--ease);
+}
+.big-metric:hover { background: var(--surface); }
+.big-metric-tag {
+  position: absolute;
+  top: 24px; right: 24px;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(201,168,76,0.08);
+  padding: 6px 12px;
+  border-radius: var(--radius);
+}
+.big-metric-num {
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 4.5vw, 5rem);
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.big-metric-title {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.big-metric-story {
+  font-size: 0.88rem;
+  color: var(--gray);
+  line-height: 1.7;
+  max-width: 440px;
+}
+.big-metric-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(201,168,76,0.03);
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════
+   FOUNDER TEST
+   ═══════════════════════════════════════ */
+.test-wrap { padding: 180px 0 120px; max-width: 860px; margin: 0 auto; }
+.test-intro { margin-bottom: 56px; }
+.test-intro h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.test-intro h1 em { font-style: italic; color: var(--gold); }
+.test-intro p { font-size: 1rem; color: var(--gray-light); line-height: 1.8; max-width: 540px; }
+.progress-bar {
+  height: 3px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  margin-bottom: 48px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, var(--gold), var(--gold-light));
+  border-radius: 10px;
+  transition: width 0.5s var(--ease);
+}
+.test-q {
+  display: none;
+  animation: heroFadeUp 0.5s var(--ease) forwards;
+}
+.test-q.active { display: block; }
+.q-num {
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.q-text {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--white);
+  margin-bottom: 36px;
+}
+.q-opts { display: flex; gap: 14px; flex-wrap: wrap; }
+.q-opt {
+  flex: 1;
+  min-width: 180px;
+  padding: 20px 24px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+  text-align: left;
+}
+.q-opt:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(201,168,76,0.04);
+}
+.q-opt.selected {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.1);
+  color: var(--gold);
+}
+.test-result {
+  display: none;
+  text-align: center;
+  padding: 60px 0;
+}
+.test-result.active { display: block; animation: heroFadeUp 0.6s var(--ease) forwards; }
+.res-score {
+  font-family: var(--serif);
+  font-size: 5rem;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.res-title {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+.res-body {
+  font-size: 1rem;
+  color: var(--gray-light);
+  max-width: 520px;
+  margin: 0 auto 36px;
+  line-height: 1.8;
+}
+.retake-btn {
+  color: var(--gray);
+  font-size: 0.82rem;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: color 0.2s;
+}
+.retake-btn:hover { color: var(--gold); }
+
+/* ═══════════════════════════════════════
+   CONTACT PAGE
+   ═══════════════════════════════════════ */
+.contact-wrap {
+  padding: 180px 0 120px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.contact-left h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 3.5vw, 4rem);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.contact-left h1 em { font-style: italic; color: var(--gold); }
+.contact-left > p {
+  font-size: 1rem;
+  color: var(--gray-light);
+  line-height: 1.85;
+  margin-bottom: 44px;
+  max-width: 440px;
+}
+.c-details { display: flex; flex-direction: column; gap: 24px; }
+.c-detail { display: flex; gap: 18px; align-items: flex-start; }
+.c-icon {
+  width: 44px; height: 44px;
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.c-label {
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.c-value { font-size: 0.95rem; color: var(--white); }
+.contact-form {
+  background: var(--surface);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  padding: 44px;
+  position: relative;
+  overflow: hidden;
+}
+.contact-form::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--gold), transparent 70%);
+}
+.form-title {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 32px;
+}
+.fg { margin-bottom: 18px; }
+.fl {
+  display: block;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 7px;
+}
+.fi, .ft {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 300;
+  transition: all 0.3s var(--ease);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.fs {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  padding-right: 40px;
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 300;
+  transition: all 0.3s var(--ease);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  cursor: pointer;
+}
+.fi:focus, .fs:focus, .ft:focus {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.03);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.08);
+}
+.fs option {
+  background: #1a1a1a;
+  color: var(--white);
+  padding: 12px;
+}
+.ft { resize: vertical; min-height: 110px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 48px 0;
+}
+.form-success.active { display: block; animation: heroFadeUp 0.5s var(--ease); }
+.form-success-icon { font-size: 3rem; margin-bottom: 16px; }
+.form-success h3 {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.form-success p { font-size: 0.9rem; color: var(--gray-light); line-height: 1.7; }
+
+/* ═══════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════ */
+footer {
+  background: var(--charcoal);
+  border-top: 1px solid var(--border);
+  padding: 64px 0 36px;
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 48px;
+}
+.footer-brand { cursor: pointer; }
+.footer-brand .tagline-img { height: 28px; width: auto; margin-top: 12px; opacity: 0.7; }
+.footer-brand p {
+  font-size: 0.82rem;
+  color: var(--gray);
+  margin-top: 12px;
+  max-width: 260px;
+  line-height: 1.6;
+}
+.footer-links { display: flex; gap: 60px; }
+.ft-col-title {
+  font-size: 0.64rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 18px;
+}
+.ft-col-links { display: flex; flex-direction: column; gap: 12px; }
+.ft-col-links a {
+  font-size: 0.82rem;
+  color: var(--gray);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.ft-col-links a:hover { color: var(--gold); }
+.footer-bottom {
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.73rem;
+  color: var(--gray);
+}
+
+/* Back to top */
+.btt {
+  position: fixed;
+  bottom: 32px; right: 32px;
+  width: 44px; height: 44px;
+  background: var(--gold);
+  color: var(--black);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 100;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.35s var(--ease);
+  box-shadow: var(--shadow-gold);
+}
+.btt.visible { opacity: 1; transform: translateY(0); }
+.btt:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(201,168,76,0.35); }
+
+/* ═══════════════════════════════════════
+   REVEAL ANIMATIONS
+   ═══════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.reveal.vis {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-d1 { transition-delay: 0.08s; }
+.reveal-d2 { transition-delay: 0.16s; }
+.reveal-d3 { transition-delay: 0.24s; }
+.reveal-d4 { transition-delay: 0.32s; }
+.reveal-d5 { transition-delay: 0.40s; }
+.reveal-d6 { transition-delay: 0.48s; }
+.reveal-d7 { transition-delay: 0.56s; }
+.reveal-d8 { transition-delay: 0.64s; }
+/* Scale-up reveal variant */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.45s var(--ease), transform 0.5s var(--ease-bounce);
+}
+.reveal-scale.vis {
+  opacity: 1;
+  transform: scale(1);
+}
+/* Slide-in from left */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.reveal-left.vis {
+  opacity: 1;
+  transform: translateX(0);
+}
+/* Slide-in from right */
+.reveal-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.reveal-right.vis {
+  opacity: 1;
+  transform: translateX(0);
+}
+/* Blur-in reveal */
+.reveal-blur {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(16px);
+  transition: opacity 0.5s var(--ease), filter 0.6s var(--ease), transform 0.5s var(--ease);
+}
+.reveal-blur.vis {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+/* Pulse glow on gold elements */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 4px 24px rgba(201,168,76,0.15); }
+  50% { box-shadow: 0 4px 32px rgba(201,168,76,0.35); }
+}
+.btn-gold:focus-visible { animation: pulseGlow 1.5s ease infinite; }
+/* Floating animation for decorative elements */
+@keyframes float {
+  0%, 100% { transform: translateY(-50%); }
+  50% { transform: translateY(calc(-50% - 12px)); }
+}
+.hero-geo { animation: geoIn 1.2s 0.4s var(--ease) forwards, float 8s 2s ease-in-out infinite; }
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   RESPONSIVE — TABLET (≤1024px)
+   ═══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .container { padding: 0 28px; }
+  .nav { padding: 16px 24px; }
+  .nav.scrolled { padding: 12px 24px; }
+  .nav-links { display: none; }
+  .hamburger { display: block; }
+
+  .hero { grid-template-columns: 1fr; }
+  .hero-content { padding: 130px 28px 80px; max-width: 100%; }
+  .hero-visual { display: none; }
+  .hero-stats { flex-wrap: wrap; }
+  .hero-stat { min-width: 45%; flex: 1 1 45%; }
+
+  .problem-grid, .solution-grid, .about-grid, .contact-wrap { grid-template-columns: 1fr; gap: 40px; }
+  .sec-problem, .sec-services { padding: 72px 0; }
+  .sec-solution, .sec-results { padding: 72px 0; }
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .results-header { grid-template-columns: 1fr; gap: 24px; }
+  .metrics-grid { grid-template-columns: 1fr 1fr; }
+
+  .page-header { padding: 130px 0 48px; }
+  .svc-full { padding: 16px 0 72px; }
+  .svc-full-item { grid-template-columns: 1fr; gap: 16px; }
+  .svc-full-left { position: static; }
+  .big-metrics { grid-template-columns: 1fr; }
+
+  .test-wrap { padding: 130px 0 72px; }
+  .about-hero { padding: 130px 0 72px; }
+  .about-values { padding: 72px 0; }
+  .values-grid { grid-template-columns: 1fr; gap: 24px; }
+  .contact-wrap { padding: 130px 0 72px; }
+  .cta-banner { padding: 72px 28px; }
+
+  footer { padding: 48px 0 24px; }
+  .footer-inner { flex-direction: column; gap: 36px; }
+  .footer-links { gap: 32px; flex-wrap: wrap; }
+  .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE — PHONE (≤640px)
+   ═══════════════════════════════════════ */
+@media (max-width: 640px) {
+  .container { padding: 0 20px; }
+  .nav { padding: 14px 20px; }
+  .nav.scrolled { padding: 10px 20px; }
+  .nav-logo svg { height: 22px; }
+
+  /* Hamburger touch-friendly */
+  .hamburger { width: 28px; height: 22px; padding: 8px; box-sizing: content-box; }
+
+  /* Hero mobile */
+  .hero-content { padding: 120px 20px 60px; }
+  .hero-title { font-size: clamp(2.2rem, 8vw, 3rem); margin-bottom: 16px; }
+  .hero-eyebrow { font-size: 0.65rem; margin-bottom: 20px; }
+  .hero-desc { font-size: 0.95rem; margin-bottom: 36px; line-height: 1.7; }
+  .hero-btns { flex-direction: column; gap: 12px; }
+  .hero-btns .btn { width: 100%; justify-content: center; padding: 16px 24px; }
+  .hero-stats { flex-direction: column; }
+  .hero-stat { border-right: none; border-bottom: 1px solid var(--border); padding: 18px 20px; }
+  .hero-stat:last-child { border-bottom: none; }
+  .hero-stat-num { font-size: 1.6rem; }
+  .hero-stat-label { font-size: 0.65rem; }
+
+  /* Section spacing */
+  .sec-problem, .sec-services, .sec-solution, .sec-results { padding: 56px 0; }
+  .about-hero { padding: 110px 0 56px; }
+  .about-values { padding: 56px 0; }
+  .page-header { padding: 110px 0 40px; }
+  .svc-full { padding: 12px 0 56px; }
+  .test-wrap { padding: 110px 0 56px; }
+  .contact-wrap { padding: 110px 0 56px; gap: 32px; }
+  .cta-banner { padding: 56px 20px; }
+  footer { padding: 40px 0 20px; }
+
+  /* Typography mobile */
+  .headline { font-size: clamp(1.8rem, 6.5vw, 2.4rem); }
+  .eyebrow { font-size: 0.62rem; letter-spacing: 0.18em; gap: 8px; }
+  .eyebrow::before { width: 20px; }
+  .sub-text { font-size: 0.95rem; }
+  .page-header h1 { font-size: clamp(2rem, 7vw, 3rem); }
+  .page-header p { font-size: 0.95rem; margin-top: 16px; }
+
+  /* Grids to single column */
+  .services-grid { grid-template-columns: 1fr; }
+  .metrics-grid { grid-template-columns: 1fr; }
+  .compare-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .problem-grid { gap: 32px; }
+
+  /* Service tiles */
+  .svc-tile { padding: 28px 20px; }
+  .svc-icon { width: 38px; height: 38px; font-size: 1.1rem; margin-bottom: 14px; }
+  .svc-name { font-size: 1rem; }
+  .svc-desc { font-size: 0.78rem; }
+
+  /* Service full items */
+  .svc-full-item { padding: 36px 0; gap: 12px; }
+  .svc-full-name { font-size: 1.4rem; }
+  .svc-full-body p { font-size: 0.92rem; }
+  .del { font-size: 0.82rem; }
+
+  /* Metrics */
+  .metric { padding: 32px 24px; }
+  .metric-num { font-size: clamp(2rem, 7vw, 2.8rem); }
+  .metric-title { font-size: 0.85rem; }
+  .metric-desc { font-size: 0.75rem; }
+
+  /* Big metrics (results page) */
+  .big-metric { padding: 36px 24px; }
+  .big-metric-num { font-size: clamp(2.2rem, 8vw, 3.5rem); }
+  .big-metric-title { font-size: 0.92rem; }
+  .big-metric-story { font-size: 0.82rem; }
+  .big-metric-tag { top: 16px; right: 16px; font-size: 0.58rem; padding: 5px 10px; }
+
+  /* Problem items */
+  .problem-text p { font-size: 0.95rem; }
+  .problem-item { padding: 20px 0; gap: 16px; }
+  .p-title { font-size: 1.05rem; }
+  .p-desc { font-size: 0.82rem; }
+
+  /* Solution card */
+  .sol-card { padding: 28px 20px; }
+  .sol-card-title { font-size: 1.5rem; }
+  .sol-card p { font-size: 0.82rem; }
+  .pill { font-size: 0.82rem; gap: 10px; }
+
+  /* Compare boxes */
+  .compare-box { padding: 20px; }
+  .compare-list li { font-size: 0.78rem; }
+
+  /* About page */
+  .about-grid h1 { font-size: clamp(2rem, 7vw, 3rem); }
+  .about-grid p { font-size: 0.95rem; }
+  .portrait-initials { font-size: 4rem; }
+  .portrait-caption { bottom: 16px; left: 16px; right: 16px; padding: 14px 16px; }
+  .portrait-caption strong { font-size: 1rem; }
+  .portrait-caption span { font-size: 0.65rem; }
+
+  /* Values */
+  .val-title { font-size: 1.2rem; }
+  .val-body { font-size: 0.82rem; }
+
+  /* Founder test */
+  .test-intro h1 { font-size: clamp(2rem, 7vw, 2.8rem); }
+  .test-intro p { font-size: 0.92rem; }
+  .q-text { font-size: clamp(1.2rem, 4.5vw, 1.6rem); margin-bottom: 28px; }
+  .q-opts { flex-direction: column; gap: 10px; }
+  .q-opt { min-width: 100%; padding: 16px 20px; font-size: 0.85rem; min-height: 44px; }
+  .res-score { font-size: 3.5rem; }
+  .res-title { font-size: 1.5rem; }
+  .res-body { font-size: 0.9rem; }
+
+  /* Contact */
+  .contact-left h1 { font-size: clamp(1.8rem, 6vw, 2.6rem); }
+  .contact-left > p { font-size: 0.92rem; margin-bottom: 32px; }
+  .c-details { gap: 18px; }
+  .c-icon { width: 40px; height: 40px; font-size: 1rem; }
+  .c-label { font-size: 0.6rem; }
+  .c-value { font-size: 0.88rem; word-break: break-all; }
+  .contact-form { padding: 28px 20px; }
+  .form-title { font-size: 1.3rem; margin-bottom: 24px; }
+  .fi, .fs, .ft { padding: 14px 16px; font-size: 0.88rem; min-height: 44px; }
+  .fl { font-size: 0.6rem; }
+  .btn { padding: 14px 24px; font-size: 0.72rem; min-height: 44px; }
+
+  /* CTA */
+  .cta-inner .headline { font-size: clamp(1.6rem, 5.5vw, 2.2rem); }
+  .cta-inner p { font-size: 0.9rem; margin-bottom: 28px; }
+  .cta-btns { flex-direction: column; align-items: stretch; }
+  .cta-btns .btn { width: 100%; justify-content: center; }
+
+  /* Footer mobile */
+  .footer-brand .tagline-img { height: 22px; }
+  .footer-brand p { font-size: 0.78rem; max-width: 100%; }
+  .footer-links { flex-direction: column; gap: 28px; }
+  .ft-col-title { font-size: 0.6rem; margin-bottom: 14px; }
+  .ft-col-links a { font-size: 0.78rem; }
+  .footer-bottom { font-size: 0.68rem; padding-top: 20px; }
+
+  /* Back to top */
+  .btt { bottom: 20px; right: 20px; width: 40px; height: 40px; font-size: 1rem; }
+
+  /* Mobile menu */
+  .mobile-menu a { font-size: 1.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav" id="mainNav">
+  <a class="nav-logo" onclick="showPage('home')">
+    <svg viewBox="0 0 406.01 122.85" xmlns="http://www.w3.org/2000/svg" style="height:26px;width:auto;">
+      <path d="M128.78,35.75l-27.11,84.73h-23.72l-13.56-45.24-13.56,45.24H27.11L0,35.75H27.11l12.2,45.41,13.22-45.41h23.72l13.22,45.41,12.2-45.41h27.11Z" fill="#f0ede5"/>
+      <path d="M215.37,121.84l-13.73-14.4c-7.96,9.15-19.66,14.91-35.42,14.91-23.38,0-38.63-12.88-38.63-33.38,0-14.74,8.13-27.79,23.55-34.57-5.42-6.27-9.49-13.22-9.49-23.21,0-19.49,15.93-31.18,33.55-31.18,14.91,0,27.96,8.3,33.04,22.37l-7.46,4.41c-3.56-11.18-13.39-18.13-25.42-18.13-14.06,0-24.57,9.15-24.57,22.2,0,9.66,5.59,16.44,12.88,23.89l37.11,38.8c3.39-6.27,5.93-14.23,7.12-23.55l7.96,4.58c-1.52,9.32-4.41,18.13-8.81,25.59l16.27,17.11-7.96,4.58Zm-19.83-20.84l-38.13-39.99c-14.91,5.59-20.67,16.95-20.67,27.79,0,15.59,11.35,24.91,29.15,24.91,12.03,0,22.2-4.24,29.65-12.71Z" fill="#be3f39"/>
+      <path d="M227.91,78.12c0-25.25,19.15-44.74,44.9-44.74,16.44,0,31.01,8.64,38.3,21.69l-22.2,12.88c-2.88-5.93-8.98-9.49-16.44-9.49-11.01,0-19.15,7.96-19.15,19.66s8.13,19.66,19.15,19.66c7.46,0,13.73-3.56,16.44-9.49l22.2,12.71c-7.29,13.22-21.69,21.86-38.3,21.86-25.76,0-44.9-19.49-44.9-44.74Z" fill="#f0ede5"/>
+      <path d="M316.2,78.12c0-25.25,20-44.74,44.9-44.74s44.9,19.49,44.9,44.74-20,44.74-44.9,44.74-44.9-19.49-44.9-44.74Zm64.39,0c0-12.03-8.47-20-19.49-20s-19.49,7.96-19.49,20,8.47,20,19.49,20,19.49-7.96,19.49-20Z" fill="#f0ede5"/>
+    </svg>
+  </a>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')">Home</a></li>
+    <li><a onclick="showPage('about')">About</a></li>
+    <li><a onclick="showPage('services')">Services</a></li>
+    <li><a onclick="showPage('results')">Results</a></li>
+    <li><a onclick="showPage('founder-test')">Founder Test</a></li>
+    <li><a onclick="showPage('contact')" class="nav-cta-link">Book a Call</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a onclick="showPage('home'); toggleMenu()">Home</a>
+  <a onclick="showPage('about'); toggleMenu()">About</a>
+  <a onclick="showPage('services'); toggleMenu()">Services</a>
+  <a onclick="showPage('results'); toggleMenu()">Results</a>
+  <a onclick="showPage('founder-test'); toggleMenu()">Founder Test</a>
+  <a onclick="showPage('contact'); toggleMenu()">Book a Call</a>
+</div>
+
+<!-- BACK TO TOP -->
+<button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- ══════════════════════════════════════════
+     HOME PAGE
+     ══════════════════════════════════════════ -->
+<section id="home" class="active">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Fractional COO Services</div>
+      <h1 class="hero-title">Stop Running<br>Your Business <em>Alone.</em></h1>
+      <p class="hero-desc">Operational leadership for founders who want to scale without burning out. Get the executive clarity your business needs — without the full-time cost.</p>
+      <div class="hero-btns">
+        <a onclick="showPage('contact')" class="btn btn-gold">Book a Consultation →</a>
+        <a onclick="showPage('founder-test')" class="btn btn-ghost">Take the Founder Test</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-bg"></div>
+      <svg class="hero-geo" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="250" cy="250" r="200" stroke="rgba(201,168,76,0.08)" stroke-width="1"/>
+        <circle cx="250" cy="250" r="150" stroke="rgba(201,168,76,0.12)" stroke-width="1"/>
+        <circle cx="250" cy="250" r="100" stroke="rgba(201,168,76,0.16)" stroke-width="1"/>
+        <line x1="50" y1="250" x2="450" y2="250" stroke="rgba(201,168,76,0.06)" stroke-width="1"/>
+        <line x1="250" y1="50" x2="250" y2="450" stroke="rgba(201,168,76,0.06)" stroke-width="1"/>
+        <line x1="108" y1="108" x2="392" y2="392" stroke="rgba(201,168,76,0.05)" stroke-width="1"/>
+        <line x1="392" y1="108" x2="108" y2="392" stroke="rgba(201,168,76,0.05)" stroke-width="1"/>
+        <circle cx="250" cy="250" r="8" fill="rgba(201,168,76,0.4)"/>
+        <circle cx="250" cy="250" r="3" fill="rgba(201,168,76,0.9)"/>
+        <circle cx="250" cy="100" r="4" fill="rgba(201,168,76,0.3)"/>
+        <circle cx="400" cy="250" r="4" fill="rgba(201,168,76,0.3)"/>
+        <circle cx="250" cy="400" r="4" fill="rgba(201,168,76,0.3)"/>
+        <circle cx="100" cy="250" r="4" fill="rgba(201,168,76,0.3)"/>
+        <polygon points="250,80 420,370 80,370" stroke="rgba(201,168,76,0.07)" stroke-width="1" fill="none"/>
+        <polygon points="250,420 80,130 420,130" stroke="rgba(201,168,76,0.07)" stroke-width="1" fill="none"/>
+      </svg>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num" data-count="1.8" data-prefix="$" data-suffix="M+">$1.8M+</div>
+        <div class="hero-stat-label">In recovered profit</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num" data-count="45" data-suffix="hrs">45hrs</div>
+        <div class="hero-stat-label">Weekly meetings eliminated</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num" data-count="3" data-suffix="mo">3mo</div>
+        <div class="hero-stat-label">Product dev (was 2 years)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEM SECTION -->
+  <div class="sec-problem">
+    <div class="container">
+      <div class="eyebrow reveal">The founder's reality</div>
+      <h2 class="headline reveal">You built this company.<br>Now it's <em>running you.</em></h2>
+      <div class="problem-grid">
+        <div class="problem-text reveal">
+          <p>You started with a vision. Now you're buried in operational chaos — putting out fires, sitting in endless meetings, and watching the big picture blur.</p>
+          <p>The company is growing, but so is the weight on your shoulders. You're the bottleneck. And deep down, you know it.</p>
+          <p>This isn't what you signed up for.</p>
+        </div>
+        <div class="problem-list">
+          <div class="problem-item reveal reveal-d1">
+            <div class="p-num">01</div>
+            <div><div class="p-title">Operational Chaos</div><div class="p-desc">Systems are broken, processes are unclear, and every week brings a new crisis you never planned for.</div></div>
+          </div>
+          <div class="problem-item reveal reveal-d2">
+            <div class="p-num">02</div>
+            <div><div class="p-title">Meeting Overload</div><div class="p-desc">Your calendar is a graveyard of recurring meetings that produce no decisions and steal hours from real work.</div></div>
+          </div>
+          <div class="problem-item reveal reveal-d3">
+            <div class="p-num">03</div>
+            <div><div class="p-title">Strategy Gets Buried</div><div class="p-desc">You know where you want to take the company. But the daily grind keeps pulling you away from the work that actually matters.</div></div>
+          </div>
+          <div class="problem-item reveal reveal-d4">
+            <div class="p-num">04</div>
+            <div><div class="p-title">Growth Becoming Dangerous</div><div class="p-desc">More revenue, more complexity, more risk. Scaling without the right systems doesn't build a company — it builds a liability.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOLUTION SECTION -->
+  <div class="sec-solution">
+    <div class="container">
+      <div class="solution-grid">
+        <div class="reveal-scale">
+          <div class="sol-card">
+            <div class="sol-card-eyebrow">What you get</div>
+            <div class="sol-card-title">Executive Operational Leadership</div>
+            <p>A seasoned COO-level partner embedded in your business — without the $300k salary and without the long-term commitment lock-in.</p>
+            <div class="pillars">
+              <div class="pill"><div class="pill-dot"></div>Strategy that actually gets executed</div>
+              <div class="pill"><div class="pill-dot"></div>Systems that run without you</div>
+              <div class="pill"><div class="pill-dot"></div>Processes that scale with growth</div>
+              <div class="pill"><div class="pill-dot"></div>Financial clarity and profit optimization</div>
+              <div class="pill"><div class="pill-dot"></div>A team that knows what to do</div>
+            </div>
+          </div>
+        </div>
+        <div class="solution-text">
+          <div class="eyebrow reveal">The solution</div>
+          <h2 class="headline reveal">Meet your <em>Fractional COO.</em></h2>
+          <p class="reveal">A Fractional COO brings executive-level operational leadership to your company on a flexible, part-time basis. You get the expertise of a seasoned C-suite leader — without the full-time overhead.</p>
+          <div class="compare-grid reveal-blur">
+            <div class="compare-box bad">
+              <div class="compare-label">Without us</div>
+              <ul class="compare-list">
+                <li>Founder is the bottleneck</li>
+                <li>Reactive operations</li>
+                <li>Chaotic growth</li>
+                <li>High burnout risk</li>
+                <li>$300k+ COO hire</li>
+              </ul>
+            </div>
+            <div class="compare-box good">
+              <div class="compare-label">With The Wolf & Co</div>
+              <ul class="compare-list">
+                <li>Founder focuses on vision</li>
+                <li>Proactive systems</li>
+                <li>Controlled, profitable growth</li>
+                <li>Time for life beyond work</li>
+                <li>Flexible engagement model</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES PREVIEW -->
+  <div class="sec-services">
+    <div class="container">
+      <div class="eyebrow reveal">What we do</div>
+      <h2 class="headline reveal">End-to-end operational<br><em>excellence.</em></h2>
+      <div class="services-grid">
+        <div class="svc-tile reveal"><div class="svc-icon">⚡</div><div class="svc-name">Fractional COO Leadership</div><div class="svc-desc">Embedded executive leadership that drives accountability, clarity, and results across your entire organization.</div></div>
+        <div class="svc-tile reveal"><div class="svc-icon">🗺</div><div class="svc-name">Strategic Planning</div><div class="svc-desc">Turn your big vision into an actionable roadmap with milestones, owners, and clear success metrics.</div></div>
+        <div class="svc-tile reveal"><div class="svc-icon">📊</div><div class="svc-name">Financial Planning</div><div class="svc-desc">Uncover hidden profit, fix cash flow, and build the financial models that support confident decision-making.</div></div>
+        <div class="svc-tile reveal"><div class="svc-icon">⚙️</div><div class="svc-name">Operational Systems Design</div><div class="svc-desc">Build scalable systems and processes that free you from the daily grind and let your company run without you.</div></div>
+        <div class="svc-tile reveal"><div class="svc-icon">👥</div><div class="svc-name">Hiring & Team Development</div><div class="svc-desc">Build the right team, define clear roles, and create a culture where people do their best work.</div></div>
+        <div class="svc-tile reveal"><div class="svc-icon">🔧</div><div class="svc-name">Technology Integration</div><div class="svc-desc">Modernize your tech stack, automate repetitive workflows, and make your tools work harder than your team.</div></div>
+        <div class="svc-tile reveal"><div class="svc-icon">🚀</div><div class="svc-name">Project & Product Development</div><div class="svc-desc">Ship faster. Cut launch times from years to months with structured project management and clear accountability.</div></div>
+        <div class="svc-tile reveal"><div class="svc-icon">💎</div><div class="svc-name">Customer Experience Optimization</div><div class="svc-desc">Transform your customer journey into a retention and referral engine that drives sustainable growth.</div></div>
+      </div>
+      <div style="text-align:center;margin-top:52px;" class="reveal">
+        <a onclick="showPage('services')" class="btn btn-ghost">View All Services</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS PREVIEW -->
+  <div class="sec-results">
+    <div class="container">
+      <div class="results-header">
+        <div>
+          <div class="eyebrow reveal">Measurable impact</div>
+          <h2 class="headline reveal">Real results.<br><em>Real numbers.</em></h2>
+        </div>
+        <div class="reveal">
+          <p>We don't deal in vague promises or feel-good frameworks. Every engagement is measured by one thing: impact on your business. These are results we've delivered for founders like you.</p>
+          <a onclick="showPage('results')" class="btn btn-ghost" style="margin-top:24px;">See Full Case Studies →</a>
+        </div>
+      </div>
+      <div class="metrics-grid">
+        <div class="metric reveal"><div class="metric-num">$1.8M</div><div class="metric-title">Profit turnaround</div><div class="metric-desc">Turned an $800k annual loss into $1M+ profit within 12 months by redesigning operations and eliminating waste.</div></div>
+        <div class="metric reveal"><div class="metric-num">−16hrs</div><div class="metric-title">Support response time</div><div class="metric-desc">Reduced customer support response time by 16 hours through process redesign and team restructuring.</div></div>
+        <div class="metric reveal"><div class="metric-num">3mo</div><div class="metric-title">Product development</div><div class="metric-desc">Compressed a 2-year product development cycle down to 3 months with systematic project management.</div></div>
+        <div class="metric reveal"><div class="metric-num">$500K</div><div class="metric-title">Operational savings</div><div class="metric-desc">Identified and captured $500,000 in operational savings within a single quarter through audit and optimization.</div></div>
+        <div class="metric reveal"><div class="metric-num">45hrs</div><div class="metric-title">Weekly meetings cut</div><div class="metric-desc">Eliminated 45 hours of unproductive weekly meetings, returning time to strategic and revenue-generating work.</div></div>
+        <div class="metric metric-cta reveal">
+          <div class="metric-cta-inner">
+            <div class="headline">Your business<br>could be next.</div>
+            <a onclick="showPage('contact')" class="btn btn-gold">Book a Call →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA BANNER -->
+  <div class="cta-banner">
+    <div class="cta-inner">
+      <h2 class="headline reveal-blur">Ready to stop being the <em>bottleneck</em> in your own company?</h2>
+      <p class="reveal">Join founders who've reclaimed their time, fixed their operations, and built companies that actually work without them.</p>
+      <div class="cta-btns reveal">
+        <a onclick="showPage('contact')" class="btn btn-gold">Book a Free Consultation →</a>
+        <a onclick="showPage('founder-test')" class="btn btn-ghost">Take the Founder Test</a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════════
+     ABOUT PAGE
+     ══════════════════════════════════════════ -->
+<section id="about">
+  <div class="about-hero">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <div class="eyebrow">About The Wolf & Company</div>
+          <h1>Operational <em>precision.</em><br>Human at the core.</h1>
+          <p>The Wolf & Company was built for founders who are too busy building their company to fix their company. We provide the operational leadership you need to scale — without burning out or losing control.</p>
+          <p>Gretchen founded this firm after watching brilliant founders stall, burn out, or give up — not because their ideas were wrong, but because the operations never caught up with the vision.</p>
+          <a onclick="showPage('contact')" class="btn btn-gold" style="margin-top:16px;">Work With Gretchen →</a>
+        </div>
+        <div class="reveal-right">
+          <div class="portrait-frame">
+            <div class="portrait-initials">G.W.</div>
+            <div class="portrait-caption">
+              <strong>Gretchen Wolf</strong>
+              <span>Founder & Fractional COO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="about-values">
+    <div class="container">
+      <div class="eyebrow">How we work</div>
+      <h2 class="headline">Three principles that guide<br><em>everything we do.</em></h2>
+      <div class="values-grid">
+        <div class="val-item reveal-left">
+          <div class="val-num">01</div>
+          <div class="val-title">Operations First</div>
+          <div class="val-body">Strategy without execution is just a dream. We go beyond recommendations — we build systems, install processes, and make sure things actually happen. Every engagement ends with something real.</div>
+        </div>
+        <div class="val-item reveal-left reveal-d1">
+          <div class="val-num">02</div>
+          <div class="val-title">Founder-Centered</div>
+          <div class="val-body">We work for you, not around you. Every decision considers your goals, your life, and your vision. We're not here to take over — we're here to free you up to do the work only you can do.</div>
+        </div>
+        <div class="val-item reveal-left reveal-d2">
+          <div class="val-num">03</div>
+          <div class="val-title">Radical Clarity</div>
+          <div class="val-body">No jargon. No 50-slide decks that gather dust. We communicate directly, move fast, and measure everything. You'll always know what's happening, what's next, and what it means for your business.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta-banner">
+    <div class="cta-inner">
+      <h2 class="headline reveal">You don't need another consultant.<br>You need an <em>operator.</em></h2>
+      <p class="reveal">Gretchen doesn't hand you a framework and walk away. She gets into the work with you, fixes what's broken, and builds what's missing.</p>
+      <div class="reveal"><a onclick="showPage('contact')" class="btn btn-gold">Start the Conversation →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SERVICES PAGE
+     ══════════════════════════════════════════ -->
+<section id="services">
+  <div class="page-header container">
+    <div class="eyebrow">Our Services</div>
+    <h1>Operational expertise<br>across every<br><em>critical function.</em></h1>
+    <p>From day-to-day firefighting to long-term scale — we bring executive-level thinking to every layer of your business.</p>
+  </div>
+  <div class="svc-full container">
+    <div class="svc-full-item reveal"><div class="svc-full-left"><div class="svc-full-num">01</div><div class="svc-full-name">Fractional COO Leadership</div></div><div class="svc-full-body"><p>Your embedded operational executive. We work inside your business — attending key meetings, driving accountability, managing the leadership team, and making sure strategy translates into day-to-day execution.</p><p>Think of it as hiring a world-class COO at a fraction of the cost, with the flexibility to scale up or down based on what the business needs.</p><div class="deliverables"><div class="del">Weekly leadership cadence and team accountability structures</div><div class="del">KPI dashboards and operational reporting frameworks</div><div class="del">Cross-functional alignment and communication systems</div><div class="del">Executive decision-making support and strategic counsel</div></div></div></div>
+    <div class="svc-full-item reveal"><div class="svc-full-left"><div class="svc-full-num">02</div><div class="svc-full-name">Strategic Planning</div></div><div class="svc-full-body"><p>Your vision deserves a real plan. We facilitate deep strategic planning sessions, then build the execution roadmap that turns ambition into quarterly action.</p><div class="deliverables"><div class="del">Annual and quarterly strategic planning facilitation</div><div class="del">OKR and goal-setting frameworks tailored to your stage</div><div class="del">Competitive positioning and market strategy</div><div class="del">90-day execution sprints with clear milestones</div></div></div></div>
+    <div class="svc-full-item reveal"><div class="svc-full-left"><div class="svc-full-num">03</div><div class="svc-full-name">Financial Planning</div></div><div class="svc-full-body"><p>We dig into your financial model, find the leaks, identify hidden profit, and build the forecasting infrastructure that gives you confidence in every major decision.</p><div class="deliverables"><div class="del">Profitability analysis and cost structure optimization</div><div class="del">Cash flow modeling and financial scenario planning</div><div class="del">Budget creation and variance tracking</div><div class="del">Revenue model review and pricing strategy</div></div></div></div>
+    <div class="svc-full-item reveal"><div class="svc-full-left"><div class="svc-full-num">04</div><div class="svc-full-name">Operational Systems Design</div></div><div class="svc-full-body"><p>We document, redesign, and install the operational systems that allow your business to run predictably — with or without you in the room.</p><div class="deliverables"><div class="del">Full operational audit and bottleneck identification</div><div class="del">SOPs and process documentation for every key function</div><div class="del">Workflow automation and efficiency optimization</div><div class="del">Scalability assessment and infrastructure planning</div></div></div></div>
+    <div class="svc-full-item reveal"><div class="svc-full-left"><div class="svc-full-num">05</div><div class="svc-full-name">Hiring & Team Development</div></div><div class="svc-full-body"><p>The right people in the right seats changes everything. We help you define roles, build hiring systems, and develop a culture where great people stay and grow.</p><div class="deliverables"><div class="del">Organizational design and role clarity</div><div class="del">Hiring process design and interview frameworks</div><div class="del">Onboarding systems and performance management</div><div class="del">Leadership development and team coaching</div></div></div></div>
+    <div class="svc-full-item reveal"><div class="svc-full-left"><div class="svc-full-num">06</div><div class="svc-full-name">Technology Integration</div></div><div class="svc-full-body"><p>Your tools should work harder than your team. We audit your tech stack, eliminate redundancy, and integrate systems that automate the work nobody should be doing manually.</p><div class="deliverables"><div class="del">Tech stack audit and consolidation strategy</div><div class="del">Automation implementation for repetitive workflows</div><div class="del">CRM, project management, and communication system design</div><div class="del">Data infrastructure and reporting dashboards</div></div></div></div>
+    <div class="svc-full-item reveal"><div class="svc-full-left"><div class="svc-full-num">07</div><div class="svc-full-name">Project & Product Development</div></div><div class="svc-full-body"><p>Stop watching launches slip by quarters — or years. We implement project management systems that create accountability, surface blockers early, and get things shipped.</p><div class="deliverables"><div class="del">Project portfolio management and prioritization</div><div class="del">Agile/hybrid delivery frameworks</div><div class="del">Product roadmap development and execution oversight</div><div class="del">Vendor and agency management</div></div></div></div>
+    <div class="svc-full-item reveal"><div class="svc-full-left"><div class="svc-full-num">08</div><div class="svc-full-name">Customer Experience Optimization</div></div><div class="svc-full-body"><p>The best growth strategy is keeping the customers you have. We map your customer journey, identify drop-off and friction points, and build systems that drive retention and referrals.</p><div class="deliverables"><div class="del">End-to-end customer journey mapping</div><div class="del">Support system design and response optimization</div><div class="del">NPS and customer feedback infrastructure</div><div class="del">Retention and loyalty program development</div></div></div></div>
+  </div>
+  <div class="cta-banner">
+    <div class="cta-inner">
+      <h2 class="headline reveal">Not sure which service<br>you need <em>most?</em></h2>
+      <p class="reveal">Start with a free consultation. We'll assess your biggest operational gaps and tell you exactly where to focus first.</p>
+      <div class="cta-btns reveal">
+        <a onclick="showPage('contact')" class="btn btn-gold">Book a Free Consultation →</a>
+        <a onclick="showPage('founder-test')" class="btn btn-ghost">Take the Founder Test</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     RESULTS PAGE
+     ══════════════════════════════════════════ -->
+<section id="results">
+  <div class="page-header container">
+    <div class="eyebrow">Results & Case Studies</div>
+    <h1>Numbers that change<br><em>everything.</em></h1>
+    <p>We measure success by the impact we have on your business. Here's what that looks like in practice.</p>
+  </div>
+  <div class="container" style="padding-bottom:120px;">
+    <div class="big-metrics">
+      <div class="big-metric reveal"><div class="big-metric-tag">Financial Transformation</div><div class="big-metric-num">$1.8M</div><div class="big-metric-title">From $800K loss to $1M+ profit in 12 months</div><div class="big-metric-story">A growing e-commerce company was hemorrhaging cash despite strong revenue. We audited the full operation, restructured the team, renegotiated supplier contracts, eliminated unprofitable product lines, and implemented a financial visibility system. Within 12 months, the business went from an $800K annual loss to over $1M in profit.</div></div>
+      <div class="big-metric reveal"><div class="big-metric-tag">Customer Operations</div><div class="big-metric-num">−16hrs</div><div class="big-metric-title">Customer support response time cut by 16 hours</div><div class="big-metric-story">A SaaS company was losing customers due to slow, inconsistent support. We redesigned their entire support operation — new tooling, tiered response system, team training, and AI-assisted triage. Average response time dropped from 18 hours to under 2 hours. Customer churn fell by 31% in the next quarter.</div></div>
+      <div class="big-metric reveal"><div class="big-metric-tag">Product Development</div><div class="big-metric-num">21mo</div><div class="big-metric-title">Product launch compressed from 2 years to 3 months</div><div class="big-metric-story">A B2B software company had been "almost ready to launch" for nearly two years. We installed a structured development framework, eliminated scope creep, created clear accountability for every deliverable, and aligned the team on a 90-day sprint. The product shipped in 3 months.</div></div>
+      <div class="big-metric reveal"><div class="big-metric-tag">Cost Optimization</div><div class="big-metric-num">$500K</div><div class="big-metric-title">Half a million in savings found in one quarter</div><div class="big-metric-story">During an operational audit of a manufacturing business, we identified redundant vendors, bloated software subscriptions, inefficient logistics contracts, and underperforming roles. Over one quarter, we helped the business capture $500K in annualized savings without cutting a single revenue-generating team member.</div></div>
+      <div class="big-metric reveal"><div class="big-metric-tag">Leadership Efficiency</div><div class="big-metric-num">45hrs</div><div class="big-metric-title">45 hours of meetings eliminated every week</div><div class="big-metric-story">A founder was spending 60% of their time in meetings — most of which produced no decisions. We redesigned the entire meeting architecture, introduced async-first communication protocols, and created a decision-making framework that eliminated recurring status meetings entirely. The founder got 45 hours per week back.</div></div>
+      <div class="big-metric big-metric-cta reveal">
+        <div style="padding:20px;text-align:center;">
+          <div style="font-family:var(--serif);font-size:1.5rem;color:var(--white);margin-bottom:12px;line-height:1.3;">Your story<br>starts here.</div>
+          <p style="font-size:0.85rem;color:var(--gray);margin-bottom:28px;line-height:1.7;">Every one of these results started with a single conversation.</p>
+          <a onclick="showPage('contact')" class="btn btn-gold">Book Your Consultation →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FOUNDER TEST PAGE
+     ══════════════════════════════════════════ -->
+<section id="founder-test">
+  <div class="test-wrap container">
+    <div class="test-intro">
+      <div class="eyebrow">Self-Assessment</div>
+      <h1>The <em>Founder Test.</em></h1>
+      <p>Answer 8 honest questions about your business. We'll show you where you stand — and what to do about it.</p>
+    </div>
+    <div class="progress-bar" id="testProgress"><div class="progress-fill" id="progressFill"></div></div>
+    <div id="testQuestions">
+      <div class="test-q active" data-q="0"><div class="q-num">Question 1 of 8</div><div class="q-text">Could your company operate smoothly for a full month without you?</div><div class="q-opts"><button class="q-opt" onclick="answerQ(0,'yes')">Yes, we have strong systems</button><button class="q-opt" onclick="answerQ(0,'maybe')">Maybe, with some hiccups</button><button class="q-opt" onclick="answerQ(0,'no')">No, things would break down</button></div></div>
+      <div class="test-q" data-q="1"><div class="q-num">Question 2 of 8</div><div class="q-text">Do you spend the majority of your time on strategy and vision — not operations?</div><div class="q-opts"><button class="q-opt" onclick="answerQ(1,'yes')">Yes, I work on the business</button><button class="q-opt" onclick="answerQ(1,'maybe')">It's about 50/50</button><button class="q-opt" onclick="answerQ(1,'no')">No, I'm in the weeds daily</button></div></div>
+      <div class="test-q" data-q="2"><div class="q-num">Question 3 of 8</div><div class="q-text">Is your company consistently profitable month over month?</div><div class="q-opts"><button class="q-opt" onclick="answerQ(2,'yes')">Yes, reliably profitable</button><button class="q-opt" onclick="answerQ(2,'maybe')">Sometimes — it fluctuates</button><button class="q-opt" onclick="answerQ(2,'no')">No, profitability is a struggle</button></div></div>
+      <div class="test-q" data-q="3"><div class="q-num">Question 4 of 8</div><div class="q-text">Do you have documented processes for your most important business functions?</div><div class="q-opts"><button class="q-opt" onclick="answerQ(3,'yes')">Yes, well documented</button><button class="q-opt" onclick="answerQ(3,'maybe')">Some, but not all</button><button class="q-opt" onclick="answerQ(3,'no')">No, mostly in people's heads</button></div></div>
+      <div class="test-q" data-q="4"><div class="q-num">Question 5 of 8</div><div class="q-text">Do you have enough personal time outside of work for your health and relationships?</div><div class="q-opts"><button class="q-opt" onclick="answerQ(4,'yes')">Yes, I have balance</button><button class="q-opt" onclick="answerQ(4,'maybe')">Somewhat, but often stretched</button><button class="q-opt" onclick="answerQ(4,'no')">No, work consumes everything</button></div></div>
+      <div class="test-q" data-q="5"><div class="q-num">Question 6 of 8</div><div class="q-text">Does your team make important decisions confidently without escalating to you?</div><div class="q-opts"><button class="q-opt" onclick="answerQ(5,'yes')">Yes, they're empowered</button><button class="q-opt" onclick="answerQ(5,'maybe')">Sometimes, not always</button><button class="q-opt" onclick="answerQ(5,'no')">No, everything comes to me</button></div></div>
+      <div class="test-q" data-q="6"><div class="q-num">Question 7 of 8</div><div class="q-text">Can you clearly see where your business will be in 12 months — and how to get there?</div><div class="q-opts"><button class="q-opt" onclick="answerQ(6,'yes')">Yes, clear roadmap</button><button class="q-opt" onclick="answerQ(6,'maybe')">Vaguely, nothing formal</button><button class="q-opt" onclick="answerQ(6,'no')">No, just surviving day to day</button></div></div>
+      <div class="test-q" data-q="7"><div class="q-num">Question 8 of 8</div><div class="q-text">Is your business growing in a way that feels controlled and sustainable?</div><div class="q-opts"><button class="q-opt" onclick="answerQ(7,'yes')">Yes, steady and healthy</button><button class="q-opt" onclick="answerQ(7,'maybe')">Growing but chaotic</button><button class="q-opt" onclick="answerQ(7,'no')">Growth is creating more problems</button></div></div>
+    </div>
+    <div class="test-result" id="testResult">
+      <div class="res-score" id="resScore"></div>
+      <div class="res-title" id="resTitle"></div>
+      <div class="res-body" id="resBody"></div>
+      <div id="resActions"></div>
+      <button class="retake-btn" onclick="resetTest()">Retake the test</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CONTACT PAGE
+     ══════════════════════════════════════════ -->
+<section id="contact">
+  <div class="contact-wrap container">
+    <div class="contact-left">
+      <div class="eyebrow">Let's Talk</div>
+      <h1>Your next chapter<br>starts with a <em>conversation.</em></h1>
+      <p>No hard pitch. No pressure. Just an honest conversation about where your business is, where you want it to go, and whether we're the right fit to help you get there.</p>
+      <div class="c-details">
+        <div class="c-detail"><div class="c-icon">✉</div><div><div class="c-label">Email</div><div class="c-value">Gretchen@thewolfandcompany.com</div></div></div>
+        <div class="c-detail"><div class="c-icon">☎</div><div><div class="c-label">Phone</div><div class="c-value">901-487-3397</div></div></div>
+        <div class="c-detail"><div class="c-icon">⏱</div><div><div class="c-label">Response time</div><div class="c-value">Within 24 hours</div></div></div>
+      </div>
+    </div>
+    <div class="contact-form" id="contactFormW">
+      <div class="form-title">Book a Free Consultation</div>
+      <div id="contactFormBody">
+        <div class="form-row">
+          <div class="fg"><label class="fl">First Name</label><input type="text" class="fi" id="fname" placeholder="Jane"></div>
+          <div class="fg"><label class="fl">Last Name</label><input type="text" class="fi" id="lname" placeholder="Smith"></div>
+        </div>
+        <div class="fg"><label class="fl">Email Address</label><input type="email" class="fi" id="email" placeholder="jane@yourcompany.com"></div>
+        <div class="fg"><label class="fl">Company Name</label><input type="text" class="fi" id="company" placeholder="Acme Corp"></div>
+        <div class="fg"><label class="fl">Annual Revenue</label><select class="fs" id="revenue"><option value="" disabled selected>Select range</option><option>Under $500K</option><option>$500K — $2M</option><option>$2M — $10M</option><option>$10M — $50M</option><option>$50M+</option></select></div>
+        <div class="fg"><label class="fl">Biggest Challenge Right Now</label><textarea class="ft" id="challenge" placeholder="Tell us what's keeping you up at night..."></textarea></div>
+        <button onclick="submitForm()" class="btn btn-gold" style="width:100%;justify-content:center;margin-top:8px;">Submit — I'm Ready to Scale →</button>
+      </div>
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">✦</div>
+        <h3>We'll be in touch soon.</h3>
+        <p>Thank you for reaching out. Gretchen personally reviews every inquiry and will respond within 24 hours to schedule your consultation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand" onclick="showPage('home')">
+        <svg viewBox="0 0 406.01 122.85" xmlns="http://www.w3.org/2000/svg" style="height:24px;width:auto;">
+          <path d="M128.78,35.75l-27.11,84.73h-23.72l-13.56-45.24-13.56,45.24H27.11L0,35.75H27.11l12.2,45.41,13.22-45.41h23.72l13.22,45.41,12.2-45.41h27.11Z" fill="#f0ede5"/>
+          <path d="M215.37,121.84l-13.73-14.4c-7.96,9.15-19.66,14.91-35.42,14.91-23.38,0-38.63-12.88-38.63-33.38,0-14.74,8.13-27.79,23.55-34.57-5.42-6.27-9.49-13.22-9.49-23.21,0-19.49,15.93-31.18,33.55-31.18,14.91,0,27.96,8.3,33.04,22.37l-7.46,4.41c-3.56-11.18-13.39-18.13-25.42-18.13-14.06,0-24.57,9.15-24.57,22.2,0,9.66,5.59,16.44,12.88,23.89l37.11,38.8c3.39-6.27,5.93-14.23,7.12-23.55l7.96,4.58c-1.52,9.32-4.41,18.13-8.81,25.59l16.27,17.11-7.96,4.58Zm-19.83-20.84l-38.13-39.99c-14.91,5.59-20.67,16.95-20.67,27.79,0,15.59,11.35,24.91,29.15,24.91,12.03,0,22.2-4.24,29.65-12.71Z" fill="#be3f39"/>
+          <path d="M227.91,78.12c0-25.25,19.15-44.74,44.9-44.74,16.44,0,31.01,8.64,38.3,21.69l-22.2,12.88c-2.88-5.93-8.98-9.49-16.44-9.49-11.01,0-19.15,7.96-19.15,19.66s8.13,19.66,19.15,19.66c7.46,0,13.73-3.56,16.44-9.49l22.2,12.71c-7.29,13.22-21.69,21.86-38.3,21.86-25.76,0-44.9-19.49-44.9-44.74Z" fill="#f0ede5"/>
+          <path d="M316.2,78.12c0-25.25,20-44.74,44.9-44.74s44.9,19.49,44.9,44.74-20,44.74-44.9,44.74-44.9-19.49-44.9-44.74Zm64.39,0c0-12.03-8.47-20-19.49-20s-19.49,7.96-19.49,20,8.47,20,19.49,20,19.49-7.96,19.49-20Z" fill="#f0ede5"/>
+        </svg>
+        <img src="WolfAndCo_Logo_White_Red_Amp_Horiz_Tag-1.png" alt="The Wolf & Company tagline" class="tagline-img">
+        <p>Fractional COO services for founders who want to scale without burning out.</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <div class="ft-col-title">Company</div>
+          <ul class="ft-col-links">
+            <li><a onclick="showPage('home')">Home</a></li>
+            <li><a onclick="showPage('about')">About Gretchen</a></li>
+            <li><a onclick="showPage('results')">Results</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="ft-col-title">Services</div>
+          <ul class="ft-col-links">
+            <li><a onclick="showPage('services')">All Services</a></li>
+            <li><a onclick="showPage('services')">Fractional COO</a></li>
+            <li><a onclick="showPage('services')">Strategic Planning</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="ft-col-title">Get Started</div>
+          <ul class="ft-col-links">
+            <li><a onclick="showPage('founder-test')">Founder Test</a></li>
+            <li><a onclick="showPage('contact')">Book a Call</a></li>
+            <li><a href="mailto:Gretchen@thewolfandcompany.com">Email Us</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 The Wolf & Company. All rights reserved.</span>
+      <span>Gretchen@thewolfandcompany.com · 901-487-3397</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── PAGE NAVIGATION (smooth fade-out → fade-in) ──
+let isTransitioning = false;
+function showPage(id) {
+  if (isTransitioning) return;
+  const current = document.querySelector('section.active');
+  const target = document.getElementById(id);
+  if (!target || current === target) return;
+  isTransitioning = true;
+  // Fade out current page
+  if (current) {
+    current.classList.add('fade-out');
+    current.classList.remove('visible');
+  }
+  // After fade-out completes, switch pages
+  setTimeout(() => {
+    document.querySelectorAll('section').forEach(s => {
+      s.style.display = 'none';
+      s.classList.remove('active', 'visible', 'fade-out');
+    });
+    target.style.display = 'block';
+    target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    // Trigger reflow then fade in
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        target.classList.add('visible');
+        initReveal();
+        isTransitioning = false;
+      });
+    });
+  }, 280);
+}
+// Show home on load
+requestAnimationFrame(() => {
+  const home = document.getElementById('home');
+  if (home) home.classList.add('visible');
+});
+
+// ── NAV SCROLL ──
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+  document.getElementById('btt').classList.toggle('visible', window.scrollY > 600);
+});
+
+// ── MOBILE MENU ──
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const burger = document.getElementById('hamburger');
+  menu.classList.toggle('open');
+  burger.classList.toggle('active');
+}
+
+// ── SCROLL REVEAL (faster, catches all reveal variants) ──
+let revealObserver;
+function initReveal() {
+  if (revealObserver) revealObserver.disconnect();
+  const els = document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right, .reveal-blur');
+  revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('vis');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+  els.forEach(el => {
+    el.classList.remove('vis');
+    revealObserver.observe(el);
+  });
+}
+initReveal();
+
+// ── FOUNDER TEST ──
+const answers = {};
+
+function answerQ(qi, val) {
+  answers[qi] = val;
+  const q = document.querySelector(`.test-q[data-q="${qi}"]`);
+  q.querySelectorAll('.q-opt').forEach(b => b.classList.remove('selected'));
+  event.target.classList.add('selected');
+  document.getElementById('progressFill').style.width = ((qi + 1) / 8 * 100) + '%';
+  setTimeout(() => {
+    if (qi + 1 < 8) {
+      q.style.display = 'none';
+      q.classList.remove('active');
+      const next = document.querySelector(`.test-q[data-q="${qi + 1}"]`);
+      next.style.display = 'block';
+      next.classList.add('active');
+    } else {
+      showResult();
+    }
+  }, 400);
+}
+
+function showResult() {
+  document.getElementById('testQuestions').style.display = 'none';
+  document.getElementById('testProgress').style.display = 'none';
+  const noC = Object.values(answers).filter(v => v === 'no').length;
+  const maybeC = Object.values(answers).filter(v => v === 'maybe').length;
+  const score = noC + (maybeC * 0.5);
+  let sl, t, b, a;
+  if (score <= 1) {
+    sl = '✦'; t = 'Strong Foundations';
+    b = "You've built something impressive. Your operations are solid, your team is capable, and you have good balance. If you want to take things to the next level — faster growth, higher profit, more freedom — a fractional COO can help you get there even faster.";
+    a = `<a onclick="showPage('contact')" class="btn btn-ghost">Let's Talk About What's Next →</a>`;
+  } else if (score <= 3) {
+    sl = '◈'; t = 'Growing Pains';
+    b = "You've got real traction, but the cracks are starting to show. This is the most dangerous stage — growth is creating chaos, and the systems haven't caught up. A fractional COO right now could be the difference between scaling confidently and burning out.";
+    a = `<a onclick="showPage('contact')" class="btn btn-gold">Book a Free Consultation →</a>`;
+  } else {
+    sl = '⬡'; t = 'You Need This Now.';
+    b = "Your business is running you. Operations are reactive, you're the bottleneck in your own company, and growth is making things harder instead of easier. This is exactly why The Wolf & Company exists. Let's talk.";
+    a = `<a onclick="showPage('contact')" class="btn btn-gold" style="font-size:0.8rem;padding:18px 36px;">Book Your Consultation — It's Free →</a>`;
+  }
+  document.getElementById('resScore').textContent = sl;
+  document.getElementById('resTitle').textContent = t;
+  document.getElementById('resBody').textContent = b;
+  document.getElementById('resActions').innerHTML = a;
+  const r = document.getElementById('testResult');
+  r.classList.add('active');
+  r.style.display = 'block';
+}
+
+function resetTest() {
+  Object.keys(answers).forEach(k => delete answers[k]);
+  document.querySelectorAll('.test-q').forEach((q, i) => {
+    q.style.display = i === 0 ? 'block' : 'none';
+    q.classList.toggle('active', i === 0);
+    q.querySelectorAll('.q-opt').forEach(b => b.classList.remove('selected'));
+  });
+  document.getElementById('progressFill').style.width = '0%';
+  const r = document.getElementById('testResult');
+  r.classList.remove('active');
+  r.style.display = 'none';
+  document.getElementById('testQuestions').style.display = 'block';
+  document.getElementById('testProgress').style.display = 'block';
+}
+
+// ── CONTACT FORM ──
+function submitForm() {
+  const fn = document.getElementById('fname').value.trim();
+  const em = document.getElementById('email').value.trim();
+  if (!fn || !em) { alert('Please fill in your name and email to continue.'); return; }
+  document.getElementById('contactFormBody').style.display = 'none';
+  document.getElementById('formSuccess').classList.add('active');
+  document.getElementById('formSuccess').style.display = 'block';
+}
+</script>
+</body>
+</html>
